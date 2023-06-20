@@ -1,0 +1,13 @@
+.container {
+    margin: 0 auto;
+    width: 1050px;
+    border: 2px solid red;
+}
+
+h1 {
+    border: 5px solid green;
+    text-align: center;
+    padding: 8px;
+    margin: 2px;
+}
+

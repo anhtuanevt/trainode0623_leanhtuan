@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============header==============*/
+.header > h1 {
+    border-bottom: 2px solid black;
+    padding: 50px;
+    text-align: center;
+}
+/* ============body==============*/
+/* ============ footer ============== */

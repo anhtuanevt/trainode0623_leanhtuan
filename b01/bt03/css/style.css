@@ -1,0 +1,24 @@
+.section {
+    color: rgb(63, 219, 167);
+
+}
+.title {
+    color: #f9f3f3;
+    border: 2px solid #111010;
+    background-color: #111010;
+    padding: 5px 15px;
+    width: 600px;
+    margin: 10px auto 40px auto;
+    text-align: center;
+    /* display: inline; */
+}
+
+.section {
+    width: 500px;
+}
+
+.section_end {
+    border: 2px solid #f9f3f3;
+    background-color: rgb(249, 246, 87);
+    font-weight: bold;
+}
