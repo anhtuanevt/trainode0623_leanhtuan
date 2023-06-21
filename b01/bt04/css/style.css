@@ -6,9 +6,74 @@
 
 /* ============header==============*/
 .header > h1 {
-    border-bottom: 2px solid black;
-    padding: 50px;
+    padding: 30px;
     text-align: center;
 }
+
 /* ============body==============*/
+
+.header_menu {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-align: center;
+    margin: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.header_menu >li {
+    display: inline;
+    margin: 40px;
+}
+
+.body_section {
+    border-bottom: 5px solid black;
+    display: flex;
+    padding: 15px 15px 0 15px;
+    margin: 0 0 0 40px;
+}
+
+.body_menu {
+    padding-left: 30px;
+}
+
+.body_section_left {
+    flex-basis: 20%;
+    padding: 15px;
+}
+
+.body_section_center {
+    flex-basis: 60%;
+    padding: 25px;
+    border-right: 2px dotted black;
+    border-left: 2px dotted black;
+}
+
+.body_section_right {
+    flex-basis: 20%;
+    padding: 15px;
+    
+}
+
+.body_section_image {
+    padding-left: 40px;
+    margin-bottom: 30px;
+}
+
+.image {
+    max-width: 80%;
+}
+
+h2 {
+    text-decoration: underline;
+    text-align: center;
+    margin: 15px;
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+
 /* ============ footer ============== */
