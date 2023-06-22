@@ -1,0 +1,32 @@
+.container {
+    width: 200px;
+    margin: 20px auto;
+    border: 2px solid black;
+    position: relative;
+}
+.box {
+    background-color: greenyellow;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    line-height: 400px;
+    position: absolute;
+}
+
+.box-1 {
+    background-color: royalblue;
+    z-index: -1;
+    top: -5px;
+    left: -5px;
+    width: 150px;
+    height: 150px;
+}
+
+.box-3 {
+    background-color: red;
+    z-index: -1;
+    top: 55px;
+    right: -5px;
+    width: 150px;
+    height: 150px;
+}

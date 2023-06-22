@@ -12,6 +12,17 @@
 
 /* ============body==============*/
 
+h2 {
+    text-decoration: underline;
+    text-align: center;
+    margin: 15px;
+}
+
+p {
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
 .header_menu {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -38,20 +49,23 @@
 }
 
 .body_section_left {
-    flex-basis: 20%;
+    /* flex-basis: 20%; */
+    float: right;
     padding: 15px;
 }
 
 .body_section_center {
-    flex-basis: 60%;
+    /* flex-basis: 60%; */
     padding: 25px;
     border-right: 2px dotted black;
     border-left: 2px dotted black;
 }
 
 .body_section_right {
-    flex-basis: 20%;
+    /* flex-basis: 20%; */
+    float: right;
     padding: 15px;
+    
     
 }
 
@@ -62,17 +76,6 @@
 
 .image {
     max-width: 80%;
-}
-
-h2 {
-    text-decoration: underline;
-    text-align: center;
-    margin: 15px;
-}
-
-p {
-    text-align: justify;
-    margin-bottom: 20px;
 }
 
 
