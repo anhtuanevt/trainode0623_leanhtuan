@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.box {
+    background-color: rgb(181, 181, 9);
+    width: 800px;
+    height: 200px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.box-logo-1 {
+    background-color: aliceblue;
+    transform: translate(-100%, -50%) translateX(-5px);
+}
+
+img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+}
+
+.box-logo-2 {
+    background-color: rgb(34, 96, 240);
+    transform: translate(0%, -50%) translateX(5px);
+}
