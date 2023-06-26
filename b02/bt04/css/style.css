@@ -3,7 +3,7 @@
     padding: 0;
 }
 .box {
-    background-color: rgb(181, 181, 9);
+    background-color: rgb(226, 226, 18);
     width: 800px;
     height: 200px;
     margin: 20px auto;
@@ -26,6 +26,7 @@
 .box-logo-1 {
     background-color: aliceblue;
     transform: translate(-100%, -50%) translateX(-5px);
+    z-index: 1;
 }
 
 img {
@@ -35,6 +36,6 @@ img {
 }
 
 .box-logo-2 {
-    background-color: rgb(34, 96, 240);
+    background-color: rgb(82, 153, 210);
     transform: translate(0%, -50%) translateX(5px);
 }
