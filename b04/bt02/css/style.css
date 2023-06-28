@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    height: 50vh;
+    background-image: url("../image/background.jpg");
+    background-size: cover;
+    position: relative;
+}
+
+.previous-button i, 
+.next-button i{
+    color: aliceblue;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.previous-button i:hover {
+    transform: translate(-3px, -20px);
+    transition: transform 0.2s;
+}
+
+.next-button i:hover {
+    transform: translate(3px, -20px);
+    transition: transform 0.2s;
+}
+
+.previous-button {
+    padding-left: 20px;
+}
+
+.next-button i{
+    right: 0;
+    padding-right: 20px;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    padding-left: 100px;
+    /* margin-left: 100px; */
+}
+
+.content button {
+    border: 1px solid white;
+    background-color: transparent;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: block;
+    margin-top: 10px;
+}
+
+.content button:hover {
+    background-color: blue;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+ul {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: white;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dot:active {
+    background-color: yellow;
+}
