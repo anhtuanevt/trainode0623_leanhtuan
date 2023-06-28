@@ -1,94 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 /* =============== header ====================== */
 .header {
-    margin: 30px;
-    float: right;
-}
-.header > a {
-    padding: 10px;
-    text-decoration: none;
-}
-
-.header-button {
-    background-color: #4285f4;
-    border-color: #4285f4;
-    padding: 5px 7px;
-    color: aliceblue;
-    font-weight: bold;
-}
-/* =============== body ====================== */
-.body {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,-50%) translateY(-100px);
-}
-
-.body > img {
-    width: 250px;
-    height: 85px;
-    display: block;
-    margin: auto auto 25px auto;
-}
-
-.google-search-box >input {
-    border-radius: 24px;
-    width: 600px;
-    height: 35px;
-    border: 1px solid rgb(170, 170, 170);
-    display: block;
-    margin: auto;
-}
-
-.body-button {
-    display: flex;
-    justify-content: center;
-}
-
-.button {
-    background-color: rgb(234, 234, 234);
-    padding: 10px 10px;
-    margin: 25px 10px 20px 0;;
-    text-align: center;
-    border-radius: 4px;
-    font-size: 16px;
-    border: 1px solid rgb(234, 234, 234);
-    color: gray;
-}
-
-.body-offered {
-    font-size: 14px;
-    transform: translateX(23%);
-}
-
-.body-offered >a{
-    text-decoration: none;
-    padding: 3px;
+    padding: 20px 20px;
+    text-align: right;
 }
 
 /* =============== footer ====================== */
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-.footer >div {
-    background-color: rgb(234, 234, 234);
-    height: 50px;
-    border: 1px solid rgb(202, 202, 202);
-    line-height: 50px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.footer a {
-    text-decoration: none;
-    padding-right: 7px;
-}
-
