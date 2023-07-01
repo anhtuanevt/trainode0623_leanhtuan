@@ -20,23 +20,18 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
-.previous-button i:hover {
-    transform: translate(-3px, -20px);
-    transition: transform 0.2s;
-}
-
-.next-button i:hover {
-    transform: translate(3px, -20px);
-    transition: transform 0.2s;
-}
 
 .previous-button {
-    padding-left: 20px;
+    transform: translate(-3px, -20px);
+    transition: transform 0.2s;
+    padding-left: 40px;
 }
 
-.next-button i{
+.next-button {
     right: 0;
     padding-right: 20px;
+    transform: translate(3px, -20px);
+    transition: transform 0.2s;
 }
 
 .content {
