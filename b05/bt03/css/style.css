@@ -13,13 +13,16 @@ body {
     background-size: cover;
     overflow: hidden;
 }
-
+img {
+    width: 100%;
+}
 .footer {
     display: flex;
     justify-content: space-between;
     color: white;
     background-image: linear-gradient(to right, #187485, #20295A);
     padding: 20px 0;
+    text-align: center;
 }
 
 .arrow {
