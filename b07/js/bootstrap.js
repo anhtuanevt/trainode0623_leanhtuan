@@ -208,7 +208,7 @@ if (typeof jQuery === 'undefined') {
 
     if (data.resetText == null) $el.data('resetText', $el[val]())
 
-    // push to event loop to allow forms to submit
+    // push to event loop to allow forms to ELEMENT_SUBMIT
     setTimeout($.proxy(function () {
       $el[val](data[state] == null ? this.options[state] : data[state])
 
@@ -1687,7 +1687,7 @@ if (typeof jQuery === 'undefined') {
     if (!this.$tip) {
       this.$tip = $(this.options.template)
       if (this.$tip.length != 1) {
-        throw new Error(this.type + ' `template` option must consist of exactly 1 top-level element!')
+        throw new Error(this.type + ' `template` option must consist of exactly 1 top-ELEMENT_LEVEL element!')
       }
     }
     return this.$tip
