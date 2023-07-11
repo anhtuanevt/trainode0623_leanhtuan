@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 500px;
+    margin: 30px auto;
+    padding: 50px;
+    box-shadow: -1px 9px 15px 2px rgba(163, 147, 147, 0.75);
+    -webkit-box-shadow: -1px 9px 15px 2px rgba(163, 147, 147, 0.75);
+    -moz-box-shadow: -1px 9px 15px 2px rgba(163, 147, 147, 0.75);
+}
+
+#my-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-row{
+    display: flex;
+    margin: 5px;
+}
+.form-row label{
+    padding: 10px;
+    flex-basis: 90px;
+    text-align: right;
+}
+
+.form-row input {
+    background-color: aliceblue;
+    flex: 1;
+}

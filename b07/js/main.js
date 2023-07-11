@@ -5,10 +5,7 @@ ELEMENT_ADD_TASK_BTN.addEventListener('click', function () {
 
 
 ELEMENT_SUBMIT.addEventListener('click', function() {
-    if (!isUpdate) {
-        handleAddNewList()
-    }
-    isUpdate = false;
+    handleAddNewList()
 })
     
 ELEMENT_CANCEL_FROM.addEventListener('click', () => cleanForm())
