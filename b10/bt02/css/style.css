@@ -102,6 +102,24 @@ body {
     margin: 5px 0;
 }
 
+.result {
+    display: flex;
+    flex-direction: row;
+    color: blue;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+}
+
+.result span:nth-last-of-type(1){
+    background-color: greenyellow;
+    color: rgb(234, 11, 11);
+    font-size: xx-large;
+    font-weight: bold;
+    margin: 10px 20px;
+    padding: 0 50px ;
+}
 /* game - control */
 .game-control {
     display: flex;
@@ -136,3 +154,4 @@ body {
     font-size: 16px;
     color: black;
 }
+
