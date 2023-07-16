@@ -5,6 +5,8 @@ const ELEMENT_TASK_NAME = document.getElementById("task_name");
 const ELEMENT_LEVEL = document.getElementById("inputDs");
 const ELEMENT_SUBMIT = document.getElementById("submit_button");
 const ELEMENT_CANCEL_FROM = document.getElementById("cancel_button");
+const ELEMENT_ID_FORM = document.getElementById("id-form");
+
 const ELEMENT_TEXT_BOX = document.getElementById("cancel_button");
 const ELEMENT_ERROR_MSG = document.getElementById("error-message");
 const ELEMENT_SEARCH_TXT = document.getElementById("search-text");

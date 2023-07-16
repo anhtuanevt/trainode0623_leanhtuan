@@ -54,8 +54,8 @@ const showData = (data) => {
 
 const cleanForm = () => {
     ELEMENT_TASK_NAME.value = '';
+    ELEMENT_ID_FORM.value = '';
     ELEMENT_LEVEL.value = 'small';
-    
 }
 
 const saveLocalStorage = (data) => {
@@ -69,23 +69,16 @@ const getLocalStorage = () => {
 }
 
 const handelUpdate = (id) => {
-    let isEventBound = false;
-    const handelUpdate = () => {
-    if (!isEventBound) {
-        let name = ELEMENT_TASK_NAME.value;
-        let level = ELEMENT_LEVEL.value;
-        let itemIndex = data.findIndex(item => item.id == id);
-        if (itemIndex !== -1) {
-            data[itemIndex].name = name;
-            data[itemIndex].level = level;
-        }
-        cleanForm();
-        saveLocalStorage(data);
-        showData(data);
-        isEventBound = true;
+    let name = ELEMENT_TASK_NAME.value;
+    let level = ELEMENT_LEVEL.value;
+    let itemIndex = data.findIndex(item => item.id == id);
+    if (itemIndex !== -1) {
+        data[itemIndex].name = name;
+        data[itemIndex].level = level;
     }
-};
-    ELEMENT_SUBMIT.addEventListener("click", handelUpdate);
+    cleanForm();
+    saveLocalStorage(data);
+    showData(data);
 }
 
 
@@ -95,6 +88,7 @@ const handleAddNewList = () => {
     let id = randomId();
     if (name != '') {
         data.push({ id, name, level })
+        ELEMENT_ERROR_MSG.textContent = '';
     } else {
         ELEMENT_ERROR_MSG.textContent = 'Please input value';
     }

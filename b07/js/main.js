@@ -1,11 +1,17 @@
 ELEMENT_ADD_TASK_BTN.addEventListener('click', function () {
+
     handleToggleForm(!open_form);
     focusOnTextBox()
 })
 
 
-ELEMENT_SUBMIT.addEventListener('click', function() {
-    handleAddNewList()
+ELEMENT_SUBMIT.addEventListener('click', function () {
+    let id = ELEMENT_ID_FORM.value ?? ''
+    if (!id) {
+        handleAddNewList()
+    } else {
+        handelUpdate(id);
+    }
 })
     
 ELEMENT_CANCEL_FROM.addEventListener('click', () => cleanForm())
@@ -24,12 +30,11 @@ const handleDelete = (id) => {
 
 const handleEdit = (id) => {
     let item = data.find(item => item.id == id);
+    ELEMENT_ID_FORM.value = item.id;
     handleToggleForm(true);
     ELEMENT_TASK_NAME.value = item.name;
     ELEMENT_LEVEL.value = item.level;
     focusOnTextBox()
-    handelUpdate(id)
-    isUpdate = true;
 }
 
 ELEMENT_GO_BTN.addEventListener('click', () => {

@@ -1,0 +1,130 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 30px auto;
+    width: 1100px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Pathway Extreme', sans-serif;
+    background-color: beige;
+}
+
+.title {
+    margin: 20px;
+    text-align: center;
+    font-weight: 800;
+}
+/* Game - container */
+.game-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+/* game number - grid */
+.number-grid {
+    border: solid 3px black;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    grid-gap: 15px;
+    width: 55%;
+    margin: 10px;
+    padding: 10px 30px;
+}
+
+.number-grid span {
+    border: solid 1px black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(229, 157, 13);
+    color: white;
+    height: 50px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: x-large;
+}
+
+/* game history */
+.game-history {
+    border: solid 3px black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.turn {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+}
+
+.turn-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.turn-left span {
+    border: 1px solid black;
+    width: 40px;
+    height: 30px;
+    background-color: rgb(186, 30, 32);
+    margin: 0 10px;
+    align-items: center;
+}
+.history{
+    display: flex;
+    flex-direction: column;
+}
+
+.history span:nth-child(1){
+    background-color: rgb(21, 228, 97);
+    width: fit-content;
+    padding: 7px;
+    margin: 5px 0;
+}
+
+/* game - control */
+.game-control {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    border: solid 3px black;
+    border-radius: 10px;
+    margin: 20px 10px;
+    background-color: rgb(191, 216, 26);
+}
+
+.game-control button {
+    background-color: yellow;
+    box-shadow: 10px 7px 26px -6px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 10px 7px 26px -6px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 10px 7px 26px -6px rgba(0, 0, 0, 0.6);
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bold;
+}
+
+/* game -rules */
+
+.game-rules ul {
+    font-size: 30px;
+    color: blue;
+    margin: 30px 10px;
+}
+
+.game-rules li {
+    font-size: 16px;
+    color: black;
+}
