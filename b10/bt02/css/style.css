@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+body {
+    background-image: url("../images/backgroud.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 .container {
     margin: 30px auto;
     width: 1100px;
@@ -10,6 +17,7 @@
     flex-direction: column;
     font-family: 'Pathway Extreme', sans-serif;
     background-color: beige;
+    border-radius: 10px;
 }
 
 .title {
@@ -102,7 +110,7 @@
     border: solid 3px black;
     border-radius: 10px;
     margin: 20px 10px;
-    background-color: rgb(191, 216, 26);
+    background-color: rgb(255, 189, 74);
 }
 
 .game-control button {
