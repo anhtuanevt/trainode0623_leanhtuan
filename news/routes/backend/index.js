@@ -1,19 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.render('backend/index.ejs', { page: 'admin page' });
-});
+const dashboardRouter = require('./dashboard')
+const itemRouter = require('./item')
+const userRouter = require('./user')
 
-router.get('/user', function(req, res, next) {
-  const {number, page} = req.query;
-  res.render('backend/index.ejs', { page: 'user page' });
-});
-
-router.get('/user/login/:username/:password', function(req, res, next) {
-  const {username, password} = req.params;
-  res.render('index', { title: 'backend ' + "username: " + username  });
-});
+router.use('/',dashboardRouter)
+router.use('/user',userRouter)
+router.use('/item',itemRouter)
 
 
 module.exports = router;
