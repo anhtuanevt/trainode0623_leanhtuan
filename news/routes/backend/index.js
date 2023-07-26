@@ -2,12 +2,10 @@ var express = require('express');
 var router = express.Router();
 
 const dashboardRouter = require('./dashboard')
-const itemRouter = require('./item')
-const userRouter = require('./user')
+const listRouter = require('./list')
 
 router.use('/',dashboardRouter)
-router.use('/user',userRouter)
-router.use('/item',itemRouter)
+router.use('/list',listRouter)
 
 
 module.exports = router;
