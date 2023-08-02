@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-.container {
+.dashboard-container {
     display: flex;
     justify-content: space-between;
 }
@@ -45,9 +45,10 @@
     padding: 10px;
 }
 
-.btn {
+.more-information-btn {
     width: 100%;
     color: white;
-    background-color: gray;
+    background-color: rgb(99, 55, 55);
     font-size: 20px;
+    border: solid 2px;
 }

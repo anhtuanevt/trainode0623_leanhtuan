@@ -3,7 +3,7 @@
     margin: 0;
 }
 
-.container {
+.adf-container {
     max-width: 1000px;
     margin: 50px auto;
     padding: 20px;
@@ -15,7 +15,7 @@
 
 }
 
-h1 {
+.adf-container h1 {
     text-align: center;
 }
 
@@ -53,11 +53,11 @@ h1 {
     color: white;
 }
 
-.submit {
+.adf-container .submit {
     background-color: green;
 }
 
-.cancel {
+.adf-container .cancel {
     background-color: red;
 }
 

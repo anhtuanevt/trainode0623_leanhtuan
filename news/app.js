@@ -6,12 +6,15 @@ var cookieParser = require('cookie-parser');
 var expressLayouts = require('express-ejs-layouts');
 // var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./src/routes/index');
+const connectDB = require('./src/app/db')
 
+// connect mongodb
+connectDB();
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.set('layout', 'backend');
@@ -39,7 +42,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 
 

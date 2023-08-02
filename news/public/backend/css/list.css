@@ -1,11 +1,12 @@
-body {
-    margin: 0 auto;
-    padding: 20px;
+.li-container{
+    display: flex;
+    flex-direction: column;
 }
 
 /* Heading style */
 h1 {
     text-align: center;
+    flex: 1;
 }
 
 /* Filter section */
