@@ -1,15 +1,12 @@
 const mainModel = require('../models/item_models')
     
 module.exports = {
-    saveItem: async (id, data) => {
-        let results = ''
-        if (id) {
-            results = await mainModel.findByIdAndUpdate(id, data)
-        } else {
-            results = await mainModel.create(data);
-        }
-        return results
+    saveItem: async (data) => {
+        let result = ''
+        result = await mainModel.create(data)
     },
+
+
 
     getItems: async (id) => {
         let result = ''
