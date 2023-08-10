@@ -1,16 +1,42 @@
 const categorySevices = require('../services/category_service')
+const {validationResult} = require('express-validator');
+const untils = require('../views/backend/helper/untils');
 
 module.exports = {
     // show all list of category
     list: async (req, res, next) => {
-        let items = await categorySevices.getItems();
-        res.render(`backend/page/category/list`, { items })
+        try {
+            let sorting = { name: 1 };
+            let keyword = req.query.keyword || '';
+            let paramStatus = req.params.status;
+
+            let condition = paramStatus === 'all' ? {} : { status: paramStatus };
+            let items = [];
+
+            if (keyword === '') {
+                items = await categorySevices.getItems('', condition, sorting);
+            } else {
+                items = await categorySevices.getItems(keyword, condition, sorting);
+                const urlWithoutKeyword = req.originalUrl.split('?')[0];
+                return res.redirect(urlWithoutKeyword);
+            }
+
+            res.render(`backend/page/category/list`, {
+                items,
+                filterStatus: await untils.filterStatus(paramStatus),
+                paramStatus,
+                keyword
+            });
+        } catch (err) {
+            console.log(err);
+        }
     },
+
 
     // show add / edit form
     getForm: async (req, res, next) => {
         const id = req.params.id || '';
-        const item = await categorySevices.getItem(id);
+        const item = await categorySevices.getItemByID(id);
         const formTitle = id ? 'Edit - Form' : 'Add - Form';
         
         res.render(`backend/page/category/form`,
@@ -20,12 +46,26 @@ module.exports = {
             })
     },
 
+    //add - edit new record
     updateForm: async (req, res, next) => {
-        const data = req.body;
-        const id = req.params.id || ''; 
-        console.log(`${JSON.stringify(data)} + hhhh  + ${JSON.stringify(req.params)}`);
-        await categorySevices.saveItem(data);
-        await res.redirect('/admin/category')
+        let data = req.body;
+        let id = data.id;
+        
+        const result = validationResult(req);
+        try {
+            if (result.isEmpty()) {
+                if (id ) {
+                    
+                    await categorySevices.updateDataById(id,data);
+                } else {
+                    await categorySevices.saveItem(data);
+                }
+                return res.redirect('/admin/category/all')
+            }
+        } catch (error) {
+            console.log(error);
+            return res.redirect('/admin/category/item/form')
+        }
     },
 
     deleteByID: async (req, res, next) => {
@@ -34,6 +74,7 @@ module.exports = {
         
         await categorySevices.deleteItem(id)
         await req.flash('success', "Xoa thanh cong", false);
-        await res.redirect('/admin/category')
+        // return res.redirect('/admin/category')
+        res.send(true)
     },
 }

@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 
 const db = require('./configs/db')
 var indexRouter = require('./routes/index');
+const configAdmin = require('./configs/system')
+
 
 var app = express();
 db.connect();
@@ -54,5 +56,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+app.locals.prefixAdmin = configAdmin.prefixAdmin;
 
 module.exports = app;
