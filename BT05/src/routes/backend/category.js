@@ -10,7 +10,7 @@ router
     .get(categoryController.list)
 
 router
-    .route('/item/form(/:id)?')
+    .route('/action/form(/:id)?')
     .get(categoryController.getForm)
     .post(
         body('name').notEmpty().withMessage('Name is not empty'),
@@ -23,5 +23,14 @@ router
     .get(categoryController.deleteByID)
 // get all list
 
+
+router
+    .route('/change-status/:id/:status')
+    .get(categoryController.changeStatus)
+
+router
+    .route('/multipleAction/:status')
+    .get(categoryController.list)
+    .post(categoryController.changeMultipleStatus)
 
 module.exports = router;

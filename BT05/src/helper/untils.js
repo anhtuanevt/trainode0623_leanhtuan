@@ -1,5 +1,5 @@
-const { count } = require('../../../models/category_model');
-const categorySevices = require('../../../services/category_service')
+const { count } = require('../models/category_model');
+const categorySevices = require('../services/category_service')
 
 module.exports = {
     filterStatus: async ( paramStatus) => {

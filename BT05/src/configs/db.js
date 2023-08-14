@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const {dbUsername, dbPassword} = require ('./account.js')
+const dbUrl  = `mongodb+srv://${dbUsername}:${dbPassword}@cluster0.hylauax.mongodb.net/items_data`
 
 async function connect() {
   try {
     mongoose.set('strictQuery' , true)
-   await mongoose.connect('mongodb+srv://admin:sPyzgS68icKFSU5Q@cluster0.hylauax.mongodb.net/items_data', {
+   await mongoose.connect(dbUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

@@ -1,0 +1,15 @@
+<%
+    statusHelper = (id, linkPrefix, status) => {
+        let link = `${linkPrefix}change-status/${id}/${status}`
+
+        let statusClass = 'fas fa-check'
+        let classColor = 'success'
+
+        if(status == 'inactive') {
+            statusClass ="fas fa-times"
+            classColor = 'danger'
+        }
+
+        return `<a href="${link}" class="rounded-circle btn btn-sm btn-${classColor}"><i class="${statusClass}"></i></a>`
+    }
+%>

@@ -8,41 +8,19 @@ module.exports = {
 
     updateDataById: async (id, newData) =>{
         try {
-            const idToUpdate = mongoose.Types.ObjectId(id);
-            return await categoryModel.findByIdAndUpdate(idToUpdate, newData, { new: true });
-            console.log('Updated document:');
+            return await categoryModel.findByIdAndUpdate(id, newData, { new: true });
         } catch (error) {
             console.error('Error updating document:', error);
         }
     },
 
-    // getItems: async (keyword, condition, sorting) => {
-    //     let result = '';
-
-    //     if (keyword) {
-    //         if (condition.status === 'all') {
-    //             result = await categoryModel.find({ name: { $regex: keyword, $options: 'i' } });
-    //         } else {
-    //             result = await categoryModel.find({
-    //                 name: { $regex: keyword, $options: 'i' },
-    //                 ...condition
-    //             });
-    //         }
-    //     } else {
-    //         // filter
-    //         if (condition.status === 'all') {
-    //             result = await categoryModel.find({});
-    //         } else {
-    //             result = await categoryModel.find(condition );
-    //         }
-    //     }
-
-    //     if (sorting) {
-    //         result = await result.find.sort(sorting)
-    //     }
-        
-    //     return result;
-    // },
+    changeStatus: async (id, status) =>{
+        try {
+            return await categoryModel.findByIdAndUpdate(id, {status} )
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
+    },
 
     getItems: async (keyword, condition, sorting) => {
         let query = categoryModel.find();

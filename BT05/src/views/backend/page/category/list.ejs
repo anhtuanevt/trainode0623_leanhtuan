@@ -1,3 +1,11 @@
+<% include ./../../helper/highlight.ejs %>
+<% include ./../../helper/statusHelper.ejs %>
+
+<%
+	const collection 			= 	'category'
+	const linkPrefix 			= 	`${prefixAdmin}/${collection}`
+%>
+
 <div class="row mb-2">
 	<div class="col-sm-6">
 		<h1 class="m-0">Danh mục sản phẩm</h1>
@@ -16,7 +24,7 @@
 			<div class="mb-1">
 				<div class="btn-search">
 					<% filterStatus.forEach(item=> {%>
-						<a href="/<%=prefixAdmin%>/category/<%=item.link%>">
+						<a href="/<%=linkPrefix%>/<%=item.link%>">
 							<button type="button" class="btn <%=item.class%>">
 								<%=item.name%> (<span>
 										<%=item.count%>
@@ -29,14 +37,14 @@
 			</div>
 
 			<div class="mb-1">
-				<form action="<%=prefixAdmin%>/category/<%= paramStatus%>" method="get">
+				<form action="/<%=linkPrefix%>/<%= paramStatus%>" method="get">
 					<div class="input-group">
 						<input type="text" class="form-control form-control-sm" name="keyword" value="<%=keyword%>"
 							placeholder="Search for..." style="min-width: 300px">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-sm btn-info" id="btn-search">Search</button>
 							<a type="button" class="btn btn-sm btn-danger"
-								href="<%=prefixAdmin%>/category/<%= paramStatus%>">Clear</a>
+								href="/<%=linkPrefix%>/<%= paramStatus%>">Clear</a>
 						</div>
 					</div>
 				</form>
@@ -47,33 +55,36 @@
 
 
 <!-- Content -->
-<form action="/<%= prefixAdmin%>/category/multipleAction" method="post" name="multipleForm" id="multiForm">
+<form action="/<%=linkPrefix%>/multipleAction" method="post" name="multipleForm" id="multiForm">
 	<div class="card card-info card-outline">
 		<div class="card-header">
 			<!-- <h4 class="card-title">List</h4> -->
+			
 			<div class="card-tools">
 				<div class="btn-group">
-					<button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false">Change
-						Status</button>
+					<button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false" 
+					onclick="showDropdown(this)">Change Status</button>
 				</div>
 				<div class="dropdown-menu" role="menu">
-					<button type="button" onClick="" class="dropdown-item" data-toggle="modal"
-						data-target="#modal-success">
+					<button type="button" class="dropdown-item" data-toggle="modal"
+						data-target="#modal-success" >
 						Change to Active
 					</button>
 					<div class="dropdown-divider"></div>
-					<button type="button" onClick="" class="dropdown-item" data-toggle="modal"
+					<button type="button" class="dropdown-item" data-toggle="modal"
 						data-target="#modal-danger">
 						Change to Inactive
 					</button>
 				</div>
 			</div>
 
-			<a href="<%= prefixAdmin%>/category/item/form" class="btn btn-warning"
-				style="background-color: #F0AD4E; color: white; font-weight: 500;">Add New</a>
-			<button type="button" class="btn btn-danger" onClick="" data-toggle="modal" data-target="#modal-danger">
-				<i class="fas fa-trash-alt"></i>Delete Multi
-			</button>
+			<div class="button-card-tools "> 
+				<a href="<%=linkPrefix%>/action/form" class="btn btn-warning"
+					style="background-color: #F0AD4E; color: white; font-weight: 500;">Add New</a>
+				<button type="button" class="btn btn-danger" onClick="" data-toggle="modal" data-target="#modal-danger">
+					<i class="fas fa-trash-alt"></i>Delete Multi
+				</button>
+			</div>
 		</div>
 		<input type="hidden" name="action" id="inputHiddenAll" value="">
 	</div>
@@ -104,30 +115,21 @@
 					<tr>
 						<td class="text-center">
 							<div class="custom-control custom-checkbox">
-								<input class="custom-control-input" type="checkbox" name="cid" id="check1" value="1">
-								<label for="check1" class="custom-control-label"></label>
+								<input class="custom-control-input" type="checkbox" name = 'cid'id="check<%=index + 1%>" value="<%=item.id%>"
+									>
+								<label for="check<%=index + 1%>" class="custom-control-label"></label>
 							</div>
-
 						</td>
 						<td class="text-center">
 							<%= index + 1 %>
 						</td>
 
 						<td class="text-center"><span>
-								<%= item.name %>
+							<%- hightLightHelper(keyword, item.name)%>
 							</span></td>
 
 						<td class="text-center position-relative">
-
-							<% if(item.status=='active' ) {%>
-								<a href="#" class="rounded-circle btn btn-sm btn-success"><i
-										class="fas fa-check"></i></a>
-								<%} else { %>
-									<!-- /admin/category/delete/<%=item.id%> -->
-									<a href="#" class="rounded-circle btn btn-sm btn-warning"><i
-											class="fas fa-times"></i></a>
-									<% } %>
-
+								<%- statusHelper(item.id, linkPrefix, item.status) %>
 						</td>
 
 						<td class="text-center position-relative">
@@ -136,12 +138,12 @@
 						</td>
 
 						<td class="text-center">
-							<a href="/<%= prefixAdmin%>/category/item/form/<%= item._id.toString()%>"
+							<a href="/<%=linkPrefix%>/action/form/<%= item.id%>"
 								class=" rounded-circle btn btn-sm btn-info " title=" Edit">
 								<i class="fas fa-pencil-alt"></i>
 							</a>
 
-							<a href="javascript:deleteItem('/<%= prefixAdmin%>/category/delete/<%=item._id.toString()%>')"
+							<a href="javascript:deleteItem('/<%= linkPrefix%>/delete/<%=item.id%>')"
 								class="rounded-circle btn btn-sm btn-danger">
 								<i class="fas fa-trash-alt"></i>
 							</a>
@@ -153,19 +155,11 @@
 		<!-- </form> -->
 
 	</div>
-	<div class="card-footer clearfix">
-		<ul class="pagination pagination-sm m-0 float-right">
-			<li class="page-item"><a class="page-link" href="#">«</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">»</a></li>
-		</ul>
-	</div>
+	 <!-- pagination -->
 	</div>
 	<form>
 
-		<script>
+		<!-- <script>
 			document.addEventListener('DOMContentLoaded', function () {
 				let deletedID;
 				let btnDeleted = document.getElementById('buttonDeleted');
@@ -191,9 +185,10 @@
 				})
 
 
-			})
+			}) -->
 
 
 
 
 		</script>
+
