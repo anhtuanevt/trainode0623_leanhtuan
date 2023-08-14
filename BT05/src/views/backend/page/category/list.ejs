@@ -128,13 +128,13 @@
 							<%- hightLightHelper(keyword, item.name)%>
 							</span></td>
 
-						<td class="text-center position-relative">
+						<td class="text-center position-relative" id="change-status-<%=item.id%>">
 								<%- statusHelper(item.id, linkPrefix, item.status) %>
 						</td>
 
 						<td class="text-center position-relative">
-							<input type="number" name="items-ordering" value="<%= item.ordering %>"
-								class="text-center ordering">
+							<input type = "number" name="items-ordering" value="<%= item.ordering %>"
+								class="text-center ordering changeOrdering" data-id="<%=item.id%>" data-prefix="<%=linkPrefix%>">
 						</td>
 
 						<td class="text-center">

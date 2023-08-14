@@ -1,6 +1,6 @@
 <%
     statusHelper = (id, linkPrefix, status) => {
-        let link = `${linkPrefix}change-status/${id}/${status}`
+        let link = `${linkPrefix}/change-status/${id}/${status}`
 
         let statusClass = 'fas fa-check'
         let classColor = 'success'
@@ -10,6 +10,6 @@
             classColor = 'danger'
         }
 
-        return `<a href="${link}" class="rounded-circle btn btn-sm btn-${classColor}"><i class="${statusClass}"></i></a>`
+        return `<a href="javascript:changeStatus('${link}', '${linkPrefix}')" class="rounded-circle btn btn-sm btn-${classColor}"><i class="${statusClass}"></i></a>`
     }
 %>

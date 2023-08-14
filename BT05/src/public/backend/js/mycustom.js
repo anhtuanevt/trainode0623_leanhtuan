@@ -13,31 +13,47 @@ const deleteItem = (link) => {
     }
 }
 
-const showDropdown = (element, event) => {
-    var dropdown = $(element);
-    var clickedElement = event.target;
-
-    dropdown.show();
-    $(document).on("click", function (event) {
-    if ((!dropdown.is(clickedElement)) || !$(".btn.btn-info").is(clickedElement)) {
-    dropdown.hide();
-    }
-});
-}
 
 
-// const isSelectedCheckbox = () => {
-//         $('.dropdown-item').each(() => {
-//         var itemId = $(this).val();
-//         console.log("Checked item ID: " + itemId);
-//     });
-// }
+const changeStatus = (link, linkPrefix) => {
+    $.ajax({
+        type: "get",
+        url: link,
+        dataType: "json",
+        success: function (response) {
+            const { data, id, currentStatus } = response
+            let link = `${linkPrefix}/change-status/${id}/${currentStatus}`
+            if (data) {
+                let parent = $(`#change-status-${id}`)
+                let statusClass = 'fas fa-check'
+                let classColor = 'success'
 
+                if(currentStatus == 'inactive') {
+                    statusClass ="fas fa-times"
+                    classColor = 'danger'
+                }
 
-const changeStatus = () => {
-    $('.dropdown-item').on('click', function () {
-        selectedStatus = $(this).data('status');
-        console.log('selectStatus');
+                let xhtml = `<a href="javascript:changeStatus('${link}', '${linkPrefix}')" class="rounded-circle btn btn-sm btn-${classColor}"><i class="${statusClass}"></i></a>`
+                parent.html(xhtml)
+            }
+        }
     });
-   
 }
+
+$('.changeOrdering').click(function (e) { 
+    e.preventDefault();
+    let val = $(this).val();
+    let id = $(this).data('id');
+    let prefix = $(this).data('prefix');
+    let link = `${prefix}/change-ordering/${id}/${val}`
+    console.log(val, id, link);
+    
+    $.ajax({
+        type: "get",
+        url: link,
+        dataType: "json",
+        success: function (response) {
+            console.log('response');
+        }
+    });
+});

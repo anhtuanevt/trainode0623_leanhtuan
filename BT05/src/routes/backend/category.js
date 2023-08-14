@@ -29,6 +29,10 @@ router
     .get(categoryController.changeStatus)
 
 router
+    .route('/change-ordering/:id/:ordering')
+    .get(categoryController.changeOrdering)
+
+router
     .route('/multipleAction/:status')
     .get(categoryController.list)
     .post(categoryController.changeMultipleStatus)

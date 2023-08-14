@@ -82,11 +82,22 @@ module.exports = {
     changeStatus: async (req, res, next) => {
         const { id, status } = req.params;
         let currentStatus = (status == 'active') ? 'inactive': 'active'
-        res.redirect(`${linkPrefix}/all`)
+        await categorySevices.changeStatus(id, currentStatus)
+        res.send({
+            data: 'success',
+            id,
+            currentStatus
+        })
     },
 
     changeMultipleStatus: async (req, res, next) => {
         let currentStatus = req.params;
         console.log(currentStatus)
+    },
+
+     changeOrdering: async (req, res, next) => {
+        let {id, val} = req.params;
+         
+        console.log(id,val)
     }
 }
