@@ -63,16 +63,16 @@
 			<div class="card-tools">
 				<div class="btn-group">
 					<button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false" 
-					onclick="showDropdown(this)">Change Status</button>
+					>Change Status</button>
 				</div>
 				<div class="dropdown-menu" role="menu">
 					<button type="button" class="dropdown-item" data-toggle="modal"
-						data-target="#modal-success" >
+						data-target="#modal-success" onclick="javascrip:changeMultiStatus('<%=linkPrefix%>','active')">
 						Change to Active
 					</button>
 					<div class="dropdown-divider"></div>
 					<button type="button" class="dropdown-item" data-toggle="modal"
-						data-target="#modal-danger">
+						data-target="#modal-danger" onclick="javascrip:changeMultiStatus('<%=linkPrefix%>','inactive')">
 						Change to Inactive
 					</button>
 				</div>
@@ -115,8 +115,7 @@
 					<tr>
 						<td class="text-center">
 							<div class="custom-control custom-checkbox">
-								<input class="custom-control-input" type="checkbox" name = 'cid'id="check<%=index + 1%>" value="<%=item.id%>"
-									>
+								<input class="custom-control-input" type="checkbox" name = 'cid'id="check<%=index + 1%>" value="<%=item.id%>">
 								<label for="check<%=index + 1%>" class="custom-control-label"></label>
 							</div>
 						</td>

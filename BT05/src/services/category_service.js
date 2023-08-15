@@ -22,6 +22,27 @@ module.exports = {
         }
     },
 
+    changeMultiStatus: async (id, status) => {
+        try {
+            const filter = { _id: { $in: id } }; 
+            const update = { $set: { status: status } };
+    
+            const result = await categoryModel.updateMany(filter, update).exec();
+            console.log('Updated documents:', result);
+        } catch (error) {
+            console.error('Error updating documents:', error);
+        }
+    },
+    
+
+    changeOrdering: async (id, ordering) =>{
+        try {
+            return await categoryModel.findByIdAndUpdate(id, {ordering} )
+        } catch (error) {
+            console.error('Error updating document:', error);
+        }
+    },
+
     getItems: async (keyword, condition, sorting) => {
         let query = categoryModel.find();
 

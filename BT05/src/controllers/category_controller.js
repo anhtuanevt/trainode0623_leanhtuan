@@ -91,13 +91,21 @@ module.exports = {
     },
 
     changeMultipleStatus: async (req, res, next) => {
-        let currentStatus = req.params;
-        console.log(currentStatus)
+        let currentStatus = req.params.status;
+        let {cid} = req.body
+
+        await categorySevices.changeMultiStatus(currentStatus, cid);
+
+        console.log(currentStatus, JSON.stringify(currentStatus, cid))
     },
 
      changeOrdering: async (req, res, next) => {
-        let {id, val} = req.params;
-         
-        console.log(id,val)
+        let {id, ordering} = req.params;
+        await categorySevices.changeOrdering(id, ordering)
+        res.send({
+            data: 'success',
+            id,
+            ordering
+        })
     }
 }

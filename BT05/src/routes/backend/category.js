@@ -4,7 +4,7 @@ const router                            = express.Router()
 
 const categoryController                = require('../../controllers/category_controller');
 
-
+// get list/ filter by status/ search
 router
     .route('(/:status)?')
     .get(categoryController.list)
@@ -21,8 +21,6 @@ router
 router
     .route('/delete/:id')
     .get(categoryController.deleteByID)
-// get all list
-
 
 router
     .route('/change-status/:id/:status')
@@ -34,7 +32,6 @@ router
 
 router
     .route('/multipleAction/:status')
-    .get(categoryController.list)
     .post(categoryController.changeMultipleStatus)
 
 module.exports = router;
