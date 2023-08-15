@@ -39,7 +39,7 @@ const changeStatus = (link, linkPrefix) => {
 }
 
 
-const changeMultiStatus = (linkPrefix, status) => {
+const changeMultipleStatus = (linkPrefix, status) => {
     let link = `${linkPrefix}/multipleAction/${status}`;
     let cid = [];
     $("input[type='checkbox'][name='cid']:checked").each(function () {
@@ -54,6 +54,9 @@ const changeMultiStatus = (linkPrefix, status) => {
         dataType: "json", 
         success: function (response) {
             console.log('success', response); 
+            if(response){
+                window.location.reload()
+            }
         },
         error: function (xhr, textStatus, errorThrown) {
             console.log('error', textStatus); 
@@ -76,7 +79,7 @@ $(document).ready(function () {
             url: link,
             dataType: "json",
             success: function (response) {
-                console.log(response);
+                console.log(response)
             }
         });
     });
@@ -91,16 +94,14 @@ $(document).ready(function () {
     });
 
     $(document).mousedown(function (e) {
-        e.preventDefault();
         if (!$(e.target).hasClass("btn-info") && !$(e.target).hasClass("dropdown-menu")) {
             if(!$(e.target).hasClass("dropdown-item")){
                 dropdown.hide();
             }else{
                 $(".dropdown-item").click(function (e) { 
                     e.preventDefault();
-                //    getListChecked();
-                   dropdown.hide();
-                })
+                   dropdown.hide
+                   })
             }
         }
     });

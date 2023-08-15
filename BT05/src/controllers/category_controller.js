@@ -92,11 +92,8 @@ module.exports = {
 
     changeMultipleStatus: async (req, res, next) => {
         let currentStatus = req.params.status;
-        let {cid} = req.body
-
-        await categorySevices.changeMultiStatus(currentStatus, cid);
-
-        console.log(currentStatus, JSON.stringify(currentStatus, cid))
+        let cid = req.body
+        await categorySevices.changeMultipleStatus(cid, currentStatus);
     },
 
      changeOrdering: async (req, res, next) => {

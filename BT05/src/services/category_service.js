@@ -22,13 +22,13 @@ module.exports = {
         }
     },
 
-    changeMultiStatus: async (id, status) => {
+    changeMultipleStatus: async (id, status) => {
         try {
             const filter = { _id: { $in: id } }; 
             const update = { $set: { status: status } };
     
             const result = await categoryModel.updateMany(filter, update).exec();
-            console.log('Updated documents:', result);
+            console.log('Updated documents:', filter, result);
         } catch (error) {
             console.error('Error updating documents:', error);
         }
