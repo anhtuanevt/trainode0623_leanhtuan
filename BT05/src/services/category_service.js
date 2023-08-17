@@ -33,6 +33,16 @@ module.exports = {
             console.error('Error updating documents:', error);
         }
     },
+
+      deleteMulti: async (id) => {
+        try {
+            const filter = { _id: { $in: id } }; 
+            const result = await categoryModel.remove(filter).exec();
+            console.log('Updated documents:', filter, result);
+        } catch (error) {
+            console.error('Error updating documents:', error);
+        }
+    },
     
 
     changeOrdering: async (id, ordering) =>{
@@ -43,8 +53,9 @@ module.exports = {
         }
     },
 
-    getItems: async (keyword, condition, sorting) => {
+    getItems: async (keyword, condition, sorting, currentPage, itemsPerPage) => {
         let query = categoryModel.find();
+        const startIndex = (currentPage - 1) * itemsPerPage;
 
         if (keyword) {
             query = query.find({ name: { $regex: keyword, $options: 'i' } });
@@ -58,9 +69,17 @@ module.exports = {
             query = query.sort(sorting);
         }
 
-        let result = await query.exec();
+        if (currentPage) {
+            query = query.find().skip(startIndex)
+            .limit(itemsPerPage);
+        }
+        const totalItems = await categoryModel.countDocuments(query.getQuery()); 
 
-        return result;
+        const result = await query.exec();
+        return {
+            totalItems: totalItems,
+            items: result
+        };
     },
 
 
@@ -98,27 +117,5 @@ module.exports = {
             console.log(error);
         }
     },
-
-    pagination: async () => {
-        // page setting
-        const page = req.query.page || 1; 
-        const itemsPerPage = 3; 
-
-        const startIndex = (page - 1) * itemsPerPage;
-        const endIndex = page * itemsPerPage;
-
-        const totalItems = await categoryModel.countDocuments(); 
-        const totalPages = Math.ceil(totalItems / itemsPerPage); 
-
-        const items = await categoryModel.find().skip(startIndex)
-            .limit(itemsPerPage);
-        
-        return {
-            endIndex: endIndex,
-            items: items,
-            totalPages: totalPages
-        };
-    }
-
 
 }

@@ -1,3 +1,4 @@
+
 const deleteItem = (link) => {
     
     let result = confirm('Bạn muốn xóa phần tử này ?')
@@ -38,9 +39,40 @@ const changeStatus = (link, linkPrefix) => {
     });
 }
 
+const deleteMulti = (linkPrefix) =>{
+    let cid = [];
+    let link = `${linkPrefix}/delete-multi`;
+    $("input[type='checkbox'][name='cid']:checked").each(function () {
+        cid.push($(this).val());
+    }); 
+
+    if (cid.length !== 0) {
+        const confirmed = window.confirm("Are you sure you want to delete the selected items?");
+        if (confirmed) {
+            $.ajax({
+            type: "POST", 
+            url: link, 
+            data: JSON.stringify(cid), 
+            contentType: "application/json", 
+            dataType: "json", 
+            success: function (response) {
+                console.log('success', response); 
+                if(response){
+                    window.location.reload()
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('error', textStatus); 
+                }
+            });
+        }
+    } else {
+         window.alert("Please select items");
+    }
+}
 
 const changeMultipleStatus = (linkPrefix, status) => {
-    let link = `${linkPrefix}/multipleAction/${status}`;
+    let link = `${linkPrefix}/change-multi-status/${status}`;
     let cid = [];
     $("input[type='checkbox'][name='cid']:checked").each(function () {
         cid.push($(this).val());
@@ -86,7 +118,7 @@ $(document).ready(function () {
 
 // ======== show / hide dropdown status ==========/
     let dropdown = $(".dropdown-menu");
-    $(".btn-info").click(function (e) { 
+    $("#change-status-drp").click(function (e) { 
         e.preventDefault();
         if (dropdown.length > 0) {
             dropdown.toggle();
@@ -121,7 +153,16 @@ $(document).ready(function () {
         $("input[type='checkbox'][name='cid']").prop("checked", isChecked);
     })
 
-   
+// ======== active sidebar ==========/
+    $('.nav-item a').click(function (e) { 
+        // e.preventDefault();
+        itemClick = $(this)
+        window.onload = () => {
+            console.log('sss' ,itemClick);
+            itemClick.closest('.nav-item').addClass('active');
+        }
+    });
+
 });
 
 

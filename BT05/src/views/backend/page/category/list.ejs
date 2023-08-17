@@ -1,5 +1,6 @@
 <% include ./../../helper/highlight.ejs %>
 <% include ./../../helper/statusHelper.ejs %>
+<% include ./../../helper/pagination.ejs %>
 
 <%
 	const collection 			= 	'category'
@@ -62,7 +63,7 @@
 			
 			<div class="card-tools">
 				<div class="btn-group">
-					<button type="button" class="btn btn-info" data-toggle="dropdown" aria-expanded="false" 
+					<button type="button" id = "change-status-drp" class="btn btn-info" data-toggle="dropdown" aria-expanded="false" 
 					>Change Status</button>
 				</div>
 				<div class="dropdown-menu" role="menu">
@@ -77,14 +78,13 @@
 					</button>
 				</div>
 			</div>
-
-			<div class="button-card-tools "> 
+			<div class="button-card-tools ">
 				<a href="<%=linkPrefix%>/action/form" class="btn btn-warning"
 					style="background-color: #F0AD4E; color: white; font-weight: 500;">Add New</a>
-				<button type="button" class="btn btn-danger" onClick="" data-toggle="modal" data-target="#modal-danger">
-					<i class="fas fa-trash-alt"></i>Delete Multi
-				</button>
+			
+				<%- include('./../../helper/deleteModal.ejs'); -%>
 			</div>
+			
 		</div>
 		<input type="hidden" name="action" id="inputHiddenAll" value="">
 	</div>
@@ -155,39 +155,6 @@
 
 	</div>
 	 <!-- pagination -->
+		<% generatePagination(currentPage, totalPages, linkPrefix, paramStatus) %>
 	</div>
 	<form>
-
-		<!-- <script>
-			document.addEventListener('DOMContentLoaded', function () {
-				let deletedID;
-				let btnDeleted = document.getElementById('buttonDeleted');
-				let deleteForm = document.forms['deletedForm'];
-				let submitAllForm = document.forms['multipleForm'];
-				let btnCheckAll = $('#checkAll');
-				let btnCheck = $('input[name="checkItem"]');
-				let btnSubmitAll = $('#buttonSubmitAll');
-				let isChecked;
-
-				// button check all has been checked
-				btnCheckAll.change(function () {
-					isChecked = btnCheckAll.prop('checked');
-					if (isChecked === false) {
-						$('input[class="ordering"]').removeAttr('name');
-					}
-					else {
-						$('input[class="ordering"]').attr('name', 'ordering');
-					}
-					btnCheck.prop('checked', isChecked);
-					disableSubmit();
-
-				})
-
-
-			}) -->
-
-
-
-
-		</script>
-

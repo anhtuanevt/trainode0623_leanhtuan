@@ -31,7 +31,11 @@ router
     .get(categoryController.changeOrdering)
 
 router
-    .route('/multipleAction/:status')
+    .route('/change-multi-status/:status')
     .post(categoryController.changeMultipleStatus)
+
+router
+    .route('/delete-multi')
+    .post(categoryController.deleteMulti)
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const categorySevices           = require('../services/category_service')
+const categoryServices           = require('../services/category_service')
 const { validationResult } = require('express-validator');
 
 
@@ -15,19 +15,24 @@ module.exports = {
     // show all list of category
     list: async (req, res, next) => {
     try {
-        let sorting = { name: 1 };
+        const sorting = { createdAt: -1 };
         let keyword = req.query.keyword || '';
         let paramStatus = req.params.status;
+        let currentPage = req.query.page == undefined ? 1 :req.query.page
+        const itemsPerPage = 5; 
 
-        let condition = paramStatus === 'all' ? {} : { status: paramStatus };
-        let items = [];
-        items = await categorySevices.getItems(keyword, condition, sorting);
+        let condition = (paramStatus === 'all')  || (paramStatus === undefined)? {} : { status: paramStatus };
+        
+        let {items, totalItems } = await categoryServices.getItems(keyword, condition, sorting, currentPage, itemsPerPage);
+        let  totalPages = Math.ceil(totalItems / itemsPerPage);
 
         res.render(`${pathCollectionPage}/list`, {
             items,
             filterStatus: await untils.filterStatus(paramStatus),
             paramStatus,
-            keyword
+            keyword,
+            currentPage,
+            totalPages
         });
     } catch (err) {
         console.log(err);
@@ -38,7 +43,7 @@ module.exports = {
     // show add / edit form
     getForm: async (req, res, next) => {
         const id = req.params.id || '';
-        const item = await categorySevices.getItemByID(id);
+        const item = await categoryServices.getItemByID(id);
         const formTitle = id ? 'Edit - Form' : 'Add - Form';
         
         res.render(`${pathCollectionPage}/form`,
@@ -53,16 +58,18 @@ module.exports = {
         
         let data = req.body;
         let id = data.id;
+        const message = "Update success !"
         
         const result = validationResult(req);
         try {
             if (result.isEmpty()) {
                 if (id ) {
                     
-                    await categorySevices.updateDataById(id,data);
+                    await categoryServices.updateDataById(id,data);
                 } else {
-                    await categorySevices.saveItem(data);
+                    await categoryServices.saveItem(data);
                 }
+                req.session.successMessage = message;
                 return res.redirect(`${linkPrefix}/all`)
             }
         } catch (error) {
@@ -74,7 +81,7 @@ module.exports = {
     deleteByID: async (req, res, next) => {
         const {id} = req.params
         
-        await categorySevices.deleteItem(id)
+        await categoryServices.deleteItem(id)
         await req.flash('success', "Xoa thanh cong", false);
         res.send(true)
     },
@@ -82,7 +89,7 @@ module.exports = {
     changeStatus: async (req, res, next) => {
         const { id, status } = req.params;
         let currentStatus = (status == 'active') ? 'inactive': 'active'
-        await categorySevices.changeStatus(id, currentStatus)
+        await categoryServices.changeStatus(id, currentStatus)
         res.send({
             data: 'success',
             id,
@@ -93,12 +100,19 @@ module.exports = {
     changeMultipleStatus: async (req, res, next) => {
         let currentStatus = req.params.status;
         let cid = req.body
-        await categorySevices.changeMultipleStatus(cid, currentStatus);
+        await categoryServices.changeMultipleStatus(cid, currentStatus);
     },
 
-     changeOrdering: async (req, res, next) => {
+    deleteMulti: async (req, res, next) => {
+        let cid = req.body
+        if (cid.length !== 0) {
+            await categoryServices.deleteMulti(cid);
+        }
+    },
+
+    changeOrdering: async (req, res, next) => {
         let {id, ordering} = req.params;
-        await categorySevices.changeOrdering(id, ordering)
+        await categoryServices.changeOrdering(id, ordering)
         res.send({
             data: 'success',
             id,

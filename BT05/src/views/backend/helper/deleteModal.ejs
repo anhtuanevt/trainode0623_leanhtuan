@@ -1,0 +1,9 @@
+<% 
+    const collection='category' 
+    const linkPrefix=`${prefixAdmin}/${collection}`
+%>
+
+<button type="button" class="btn btn-danger" onClick="deleteMulti('<%=linkPrefix%>')" data-toggle="modal"
+    data-target="#modal-danger">
+    <i class="fas fa-trash-alt"></i>Delete Multi
+</button>

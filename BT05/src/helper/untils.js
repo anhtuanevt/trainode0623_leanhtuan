@@ -1,5 +1,5 @@
 const { count } = require('../models/category_model');
-const categorySevices = require('../services/category_service')
+const categoryServices = require('../services/category_service')
 
 module.exports = {
     filterStatus: async ( paramStatus) => {
@@ -10,12 +10,15 @@ module.exports = {
         ];
         try {
             for (item of filterStatus) {
-                let countStatus = await categorySevices.countStatus(item.value)
+                let countStatus = await categoryServices.countStatus(item.value)
                 item.count = countStatus;
                 // check current status 
                 if (paramStatus == item.value) {
                     item.class = "btn-success";
                 }
+                if (paramStatus == undefined) {
+                    filterStatus[0].class = "btn-success";
+                } 
             }
             return filterStatus;
             } catch (err) {
