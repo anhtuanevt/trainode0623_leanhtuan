@@ -2,17 +2,17 @@
     <% currentPage = parseInt(currentPage); %>
     <ul class="pagination pagination-sm m-0 float-right">
         <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
-            <a class="page-link" href="<%=linkPrefix%>/<%=status%>?page=<%=currentPage - 1 %>">«</a>
+            <a class="page-link" href="<%=linkPrefix%>/status/<%=status%>?page=<%=currentPage - 1 %>">«</a>
         </li>
         <% for (let i=1; i <=totalPages; i++) { %>
             <li class="page-item <%= currentPage == i ? 'active' : 'inactive' %>">
-                <a class="page-link" href="<%=linkPrefix%>/<%=status%>?page=<%=i%>">
+                <a class="page-link" href="<%=linkPrefix%>/status/<%=status%>?page=<%=i%>">
                     <%= i %>
                 </a>
             </li>
             <% } %>
                 <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-                    <a class="page-link" href="<%=linkPrefix%>/<%=status%>?page=<%=currentPage + 1 %>">»</a>
+                    <a class="page-link" href="<%=linkPrefix%>/status/<%=status%>?page=<%=currentPage + 1 %>">»</a>
                 </li>
     </ul>
     <% } %>

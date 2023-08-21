@@ -37,7 +37,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(flash()); // Initialize the flash middleware
+app.use(
+  flash({
+    sessionKeyName: 'express-flash-message',
+  }));
 
 app.use('/', indexRouter);
 

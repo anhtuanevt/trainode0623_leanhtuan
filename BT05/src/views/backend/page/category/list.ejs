@@ -25,7 +25,7 @@
 			<div class="mb-1">
 				<div class="btn-search">
 					<% filterStatus.forEach(item=> {%>
-						<a href="/<%=linkPrefix%>/<%=item.link%>">
+						<a href="/<%=linkPrefix%>/status/<%=item.link%>">
 							<button type="button" class="btn <%=item.class%>">
 								<%=item.name%> (<span>
 										<%=item.count%>
@@ -38,14 +38,14 @@
 			</div>
 
 			<div class="mb-1">
-				<form action="/<%=linkPrefix%>/<%= paramStatus%>" method="get">
+				<form action="/<%=linkPrefix%>/status/<%= paramStatus%>" method="get">
 					<div class="input-group">
 						<input type="text" class="form-control form-control-sm" name="keyword" value="<%=keyword%>"
 							placeholder="Search for..." style="min-width: 300px">
 						<div class="input-group-append">
 							<button type="submit" class="btn btn-sm btn-info" id="btn-search">Search</button>
 							<a type="button" class="btn btn-sm btn-danger"
-								href="/<%=linkPrefix%>/<%= paramStatus%>">Clear</a>
+								href="/<%=linkPrefix%>/status/<%= paramStatus%>">Clear</a>
 						</div>
 					</div>
 				</form>
@@ -68,18 +68,18 @@
 				</div>
 				<div class="dropdown-menu" role="menu">
 					<button type="button" class="dropdown-item" data-toggle="modal"
-						data-target="#modal-success" onclick="javascrip:changeMultipleStatus('<%=linkPrefix%>','active')">
+						data-target="#modal-success" onclick="javascript:changeMultipleStatus('<%=linkPrefix%>','active')">
 						Change to Active
 					</button>
 					<div class="dropdown-divider"></div>
 					<button type="button" class="dropdown-item" data-toggle="modal"
-						data-target="#modal-danger" onclick="javascrip:changeMultipleStatus('<%=linkPrefix%>','inactive')">
+						data-target="#modal-danger" onclick="javascript:changeMultipleStatus('<%=linkPrefix%>','inactive')">
 						Change to Inactive
 					</button>
 				</div>
 			</div>
 			<div class="button-card-tools ">
-				<a href="<%=linkPrefix%>/action/form" class="btn btn-warning"
+				<a href="<%=linkPrefix%>/form" class="btn btn-warning"
 					style="background-color: #F0AD4E; color: white; font-weight: 500;">Add New</a>
 			
 				<%- include('./../../helper/deleteModal.ejs'); -%>
@@ -137,7 +137,7 @@
 						</td>
 
 						<td class="text-center">
-							<a href="/<%=linkPrefix%>/action/form/<%= item.id%>"
+							<a href="/<%=linkPrefix%>/form/<%= item.id%>"
 								class=" rounded-circle btn btn-sm btn-info " title=" Edit">
 								<i class="fas fa-pencil-alt"></i>
 							</a>

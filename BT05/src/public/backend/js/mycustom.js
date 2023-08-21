@@ -34,6 +34,7 @@ const changeStatus = (link, linkPrefix) => {
 
                 let xhtml = `<a href="javascript:changeStatus('${link}', '${linkPrefix}')" class="rounded-circle btn btn-sm btn-${classColor}"><i class="${statusClass}"></i></a>`
                 parent.html(xhtml)
+                alertify.success('Thay doi status thanh cong');
             }
         }
     });
@@ -77,12 +78,11 @@ const changeMultipleStatus = (linkPrefix, status) => {
     $("input[type='checkbox'][name='cid']:checked").each(function () {
         cid.push($(this).val());
     }); 
-
-    $.ajax({
+    if (cid.length != 0) {
+        $.ajax({
         type: "POST", 
         url: link, 
-        data: JSON.stringify(cid), 
-        contentType: "application/json", 
+        data: { cid: JSON.stringify(cid) },
         dataType: "json", 
         success: function (response) {
             console.log('success', response); 
@@ -94,12 +94,16 @@ const changeMultipleStatus = (linkPrefix, status) => {
             console.log('error', textStatus); 
         }
     });
+    } else {
+         window.alert("Please select items");
+    }
+    
 };
 
 
 $(document).ready(function () {
-
-    $('.changeOrdering').click(function (e) { 
+    
+    $('.changeOrdering').click(function (e) {
         e.preventDefault();
         let ordering = $(this).val();
         let id = $(this).data('id');
@@ -116,9 +120,9 @@ $(document).ready(function () {
         });
     });
 
-// ======== show / hide dropdown status ==========/
+    // ======== show / hide dropdown status ==========/
     let dropdown = $(".dropdown-menu");
-    $("#change-status-drp").click(function (e) { 
+    $("#change-status-drp").click(function (e) {
         e.preventDefault();
         if (dropdown.length > 0) {
             dropdown.toggle();
@@ -127,18 +131,18 @@ $(document).ready(function () {
 
     $(document).mousedown(function (e) {
         if (!$(e.target).hasClass("btn-info") && !$(e.target).hasClass("dropdown-menu")) {
-            if(!$(e.target).hasClass("dropdown-item")){
+            if (!$(e.target).hasClass("dropdown-item")) {
                 dropdown.hide();
-            }else{
-                $(".dropdown-item").click(function (e) { 
+            } else {
+                $(".dropdown-item").click(function (e) {
                     e.preventDefault();
-                   dropdown.hide
-                   })
+                    dropdown.hide
+                })
             }
         }
     });
 
-// ======== check/uncheck check box ==========/
+    // ======== check/uncheck check box ==========/
     $("input[type='checkbox']").change(function () {
         if ($(this).is(':checked')) {
             console.log("Checkbox is checked.");
@@ -153,17 +157,29 @@ $(document).ready(function () {
         $("input[type='checkbox'][name='cid']").prop("checked", isChecked);
     })
 
-// ======== active sidebar ==========/
-    $('.nav-item a').click(function (e) { 
-        // e.preventDefault();
-        itemClick = $(this)
-        window.onload = () => {
-            console.log('sss' ,itemClick);
-            itemClick.closest('.nav-item').addClass('active');
-        }
-    });
+    activeMenuOnClick('#nav-list', '/admin/category/status')
+})
+const showAlertCustom = (message, statusCode = "success") =>{
+    switch (statusCode) {
+        case success:
+             alertify.success(message)
+            break;
+        
+        case warning:
+             alertify.success(message)
+            break;
+        default:
 
-});
+            break;
+    }
+}
 
+const activeMenuOnClick = (menu, pathUrl) => {
+    let currentURL = window.location.pathname;
+    if (currentURL.includes(pathUrl)) {
+        $(menu).addClass('bg-primary');
+        console.log('Active class added');
+    }
+}
 
 

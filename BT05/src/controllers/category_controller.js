@@ -25,7 +25,7 @@ module.exports = {
         
         let {items, totalItems } = await categoryServices.getItems(keyword, condition, sorting, currentPage, itemsPerPage);
         let  totalPages = Math.ceil(totalItems / itemsPerPage);
-
+        res.flash('success', '-----info----');
         res.render(`${pathCollectionPage}/list`, {
             items,
             filterStatus: await untils.filterStatus(paramStatus),
@@ -69,12 +69,13 @@ module.exports = {
                 } else {
                     await categoryServices.saveItem(data);
                 }
-                req.session.successMessage = message;
-                return res.redirect(`${linkPrefix}/all`)
+                return res.redirect(`${linkPrefix}/status/all`)
+            } else {
+                return res.redirect(`${linkPrefix}/form`)
             }
         } catch (error) {
             console.log(error);
-            return res.redirect(`${linkPrefix}/action/form`)
+            return res.redirect(`${linkPrefix}/form`)
         }
     },
 
@@ -99,8 +100,10 @@ module.exports = {
 
     changeMultipleStatus: async (req, res, next) => {
         let currentStatus = req.params.status;
-        let cid = req.body
+        console.log(typeof (req.body));
+        let cid = req.body.cid
         await categoryServices.changeMultipleStatus(cid, currentStatus);
+        res.send({})
     },
 
     deleteMulti: async (req, res, next) => {
