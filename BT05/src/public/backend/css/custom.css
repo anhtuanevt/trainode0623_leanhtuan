@@ -12,3 +12,13 @@
     background-color: yellow;
 }
 
+ .ck-editor__editable[role="textbox"] {
+     /* editing area */
+     min-height: 200px;
+ }
+
+ .ck-content .image {
+     /* block images */
+     max-width: 100%;
+     margin: 20px auto;
+ }

@@ -1,4 +1,4 @@
-const categoryServices           = require('../services/category_service')
+const mainServices           = require('../services/category_service')
 const { validationResult } = require('express-validator');
 
 
@@ -23,12 +23,12 @@ module.exports = {
 
         let condition = (paramStatus === 'all')  || (paramStatus === undefined)? {} : { status: paramStatus };
         
-        let {items, totalItems } = await categoryServices.getItems(keyword, condition, sorting, currentPage, itemsPerPage);
+        let {items, totalItems } = await mainServices.getItems(keyword, condition, sorting, currentPage, itemsPerPage);
         let  totalPages = Math.ceil(totalItems / itemsPerPage);
-        res.flash('success', '-----info----');
+        // res.flash('success', '-----info----');
         res.render(`${pathCollectionPage}/list`, {
             items,
-            filterStatus: await untils.filterStatus(paramStatus),
+            filterStatus: await untils.filterStatus(paramStatus, mainServices),
             paramStatus,
             keyword,
             currentPage,
@@ -43,7 +43,7 @@ module.exports = {
     // show add / edit form
     getForm: async (req, res, next) => {
         const id = req.params.id || '';
-        const item = await categoryServices.getItemByID(id);
+        const item = await mainServices.getItemByID(id);
         const formTitle = id ? 'Edit - Form' : 'Add - Form';
         
         res.render(`${pathCollectionPage}/form`,
@@ -65,9 +65,9 @@ module.exports = {
             if (result.isEmpty()) {
                 if (id ) {
                     
-                    await categoryServices.updateDataById(id,data);
+                    await mainServices.updateDataById(id,data);
                 } else {
-                    await categoryServices.saveItem(data);
+                    await mainServices.saveItem(data);
                 }
                 return res.redirect(`${linkPrefix}/status/all`)
             } else {
@@ -82,7 +82,7 @@ module.exports = {
     deleteByID: async (req, res, next) => {
         const {id} = req.params
         
-        await categoryServices.deleteItem(id)
+        await mainServices.deleteItem(id)
         await req.flash('success', "Xoa thanh cong", false);
         res.send(true)
     },
@@ -90,7 +90,7 @@ module.exports = {
     changeStatus: async (req, res, next) => {
         const { id, status } = req.params;
         let currentStatus = (status == 'active') ? 'inactive': 'active'
-        await categoryServices.changeStatus(id, currentStatus)
+        await mainServices.changeStatus(id, currentStatus)
         res.send({
             data: 'success',
             id,
@@ -102,20 +102,20 @@ module.exports = {
         let currentStatus = req.params.status;
         console.log(typeof (req.body));
         let cid = req.body.cid
-        await categoryServices.changeMultipleStatus(cid, currentStatus);
+        await mainServices.changeMultipleStatus(cid, currentStatus);
         res.send({})
     },
 
     deleteMulti: async (req, res, next) => {
         let cid = req.body
         if (cid.length !== 0) {
-            await categoryServices.deleteMulti(cid);
+            await mainServices.deleteMulti(cid);
         }
     },
 
     changeOrdering: async (req, res, next) => {
         let {id, ordering} = req.params;
-        await categoryServices.changeOrdering(id, ordering)
+        await mainServices.changeOrdering(id, ordering)
         res.send({
             data: 'success',
             id,

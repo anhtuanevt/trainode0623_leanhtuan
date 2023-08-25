@@ -23,31 +23,56 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
+        <li class="nav-item menu">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
+            </p>
+          </a>
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Category
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item" id="nav-list">
+            <li class="nav-item" id="category-list">
               <a href="/<%=prefixAdmin%>/category/status" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>List</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./index2.html" class="nav-link">
+            <li class="nav-item" id="category-form">
+              <a href="/<%=prefixAdmin%>/category/form" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v2</p>
+                <p>Form</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./index3.html" class="nav-link">
+          </ul>
+        </li>
+        <li class="nav-item menu-open">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Article
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item" id="article-list">
+              <a href="/<%=prefixAdmin%>/article/status" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v3</p>
+                <p>List</p>
+              </a>
+            </li>
+            <li class="nav-item" id="article-form">
+              <a href="/<%=prefixAdmin%>/article/form" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Form</p>
               </a>
             </li>
           </ul>

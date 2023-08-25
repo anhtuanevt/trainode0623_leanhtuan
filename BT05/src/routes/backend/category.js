@@ -2,40 +2,40 @@ const express                           = require('express')
 const { body }                          = require('express-validator');
 const router                            = express.Router()
 
-const categoryController                = require('../../controllers/category_controller');
+const mainController                = require('../../controllers/category_controller');
 
 
 router
     .route('/form(/:id)?')
-    .get(categoryController.getForm)
+    .get(mainController.getForm)
     .post(
         body('name').notEmpty().withMessage('Name is not empty'),
         body('status').isIn(['inactive', 'active']).withMessage('status is only active or inactive'),
         body('ordering').isInt({min: 1}).withMessage('Ordering should >= 1'),
-        categoryController.updateForm)
+        mainController.updateForm)
 
 router
     .route('/status(/:status)?')
-    .get(categoryController.list)
+    .get(mainController.list)
 
 router
     .route('/delete/:id')
-    .get(categoryController.deleteByID)
+    .get(mainController.deleteByID)
 
 router
     .route('/change-status/:id/:status')
-    .get(categoryController.changeStatus)
+    .get(mainController.changeStatus)
 
 router
     .route('/change-ordering/:id/:ordering')
-    .get(categoryController.changeOrdering)
+    .get(mainController.changeOrdering)
 
 router
     .route('/change-multi-status/:status')
-    .post(categoryController.changeMultipleStatus)
+    .post(mainController.changeMultipleStatus)
 
 router
     .route('/delete-multi')
-    .post(categoryController.deleteMulti)
+    .post(mainController.deleteMulti)
 
 module.exports = router;

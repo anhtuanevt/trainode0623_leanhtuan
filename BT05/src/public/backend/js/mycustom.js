@@ -157,7 +157,13 @@ $(document).ready(function () {
         $("input[type='checkbox'][name='cid']").prop("checked", isChecked);
     })
 
-    activeMenuOnClick('#nav-list', '/admin/category/status')
+    // active menu
+    activeMenuOnClick('#category-list', '/admin/category/status')
+    activeMenuOnClick('#category-form', '/admin/category/form');
+    activeMenuOnClick('#article-list', '/admin/article/status')
+    activeMenuOnClick('#article-form', '/admin/article/form')
+
+    initializeCKEditor();
 })
 const showAlertCustom = (message, statusCode = "success") =>{
     switch (statusCode) {
@@ -182,4 +188,13 @@ const activeMenuOnClick = (menu, pathUrl) => {
     }
 }
 
-
+function initializeCKEditor() {
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        // .then(editor => {
+        //     editor.setData('<%= item.description %>');
+        // })
+        .catch(error => {
+            console.error(error);
+        });
+}

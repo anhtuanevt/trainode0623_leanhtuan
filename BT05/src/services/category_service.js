@@ -1,14 +1,14 @@
 const mongoose              = require('mongoose');
-const categoryModel         = require('../models/category_model')
+const mainModel         = require('../models/category_model')
 
 module.exports = {
     saveItem: async (data) => {
-        return await categoryModel.create(data);
+        return await mainModel.create(data);
     },
 
     updateDataById: async (id, newData) =>{
         try {
-            return await categoryModel.findByIdAndUpdate(id, newData, { new: true });
+            return await mainModel.findByIdAndUpdate(id, newData, { new: true });
         } catch (error) {
             console.error('Error updating document:', error);
         }
@@ -16,7 +16,7 @@ module.exports = {
 
     changeStatus: async (id, status) =>{
         try {
-            return await categoryModel.findByIdAndUpdate(id, {status} )
+            return await mainModel.findByIdAndUpdate(id, {status} )
         } catch (error) {
             console.error('Error updating document:', error);
         }
@@ -27,7 +27,7 @@ module.exports = {
             const filter = { _id: { $in: id } }; 
             const update = { $set: { status: status } };
     
-            const result = await categoryModel.updateMany(filter, update).exec();
+            const result = await mainModel.updateMany(filter, update).exec();
             console.log('Updated documents:', filter, result);
         } catch (error) {
             console.error('Error updating documents:', error);
@@ -37,7 +37,7 @@ module.exports = {
       deleteMulti: async (id) => {
         try {
             const filter = { _id: { $in: id } }; 
-            const result = await categoryModel.remove(filter).exec();
+            const result = await mainModel.remove(filter).exec();
             console.log('Updated documents:', filter, result);
         } catch (error) {
             console.error('Error updating documents:', error);
@@ -47,14 +47,14 @@ module.exports = {
 
     changeOrdering: async (id, ordering) =>{
         try {
-            return await categoryModel.findByIdAndUpdate(id, {ordering} )
+            return await mainModel.findByIdAndUpdate(id, {ordering} )
         } catch (error) {
             console.error('Error updating document:', error);
         }
     },
 
     getItems: async (keyword, condition, sorting, currentPage, itemsPerPage) => {
-        let query = categoryModel.find();
+        let query = mainModel.find();
         const startIndex = (currentPage - 1) * itemsPerPage;
 
         if (keyword) {
@@ -73,7 +73,7 @@ module.exports = {
             query = query.find().skip(startIndex)
             .limit(itemsPerPage);
         }
-        const totalItems = await categoryModel.countDocuments(query.getQuery()); 
+        const totalItems = await mainModel.countDocuments(query.getQuery()); 
 
         const result = await query.exec();
         return {
@@ -93,7 +93,7 @@ module.exports = {
         }
         try {
             if (id) {
-                item = await categoryModel.findById(id).exec();
+                item = await mainModel.findById(id).exec();
             }
         } catch (err) {
             console.log(err);
@@ -104,7 +104,7 @@ module.exports = {
     countStatus: async (value) => {
         let condition = (value == 'all') ? {} : {status: value}
         try {
-            return await categoryModel.countDocuments(condition);
+            return await mainModel.countDocuments(condition);
         } catch (err) {
             console.error(err);
         }
@@ -112,7 +112,7 @@ module.exports = {
 
     deleteItem: async (id) => {
         try {
-            return await categoryModel.findByIdAndRemove(id)
+            return await mainModel.findByIdAndRemove(id)
         } catch (error) {
             console.log(error);
         }
