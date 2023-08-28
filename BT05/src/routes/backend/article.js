@@ -1,16 +1,23 @@
 const express                           = require('express')
 const router                            = express.Router()
 
-const { body } = require('express-validator');
-const multer = require('multer');
-const upload = multer({
-    dest: './../../public/uploads/',
-    limit: {
-         fileSize: 1024 * 1024 * 2,
-    }
+const { body }                          = require('express-validator');
+const multer                            = require('multer');
+const mainController                    = require('../../controllers/article_controller');
+
+const storage = multer.diskStorage({
+  destination: 'public/uploads',
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
 });
 
-const mainController                = require('../../controllers/article_controller');
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 2,
+  },
+});
 
 router
     .route('/form(/:id)?')

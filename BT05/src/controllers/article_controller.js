@@ -10,8 +10,21 @@ const pathCollectionPage        = `backend/page/${collection}`;
 const linkPrefix = `/${systemConfig.prefixAdmin}/${collection}`;
 
 
-
 module.exports = {
+    // postImage: async (req, res, next) => {
+    //     upload.single('image')(req, res, function (err) {
+    //         if (err) {
+    //             return res.status(400).send('Upload failed.');
+    //         }
+
+    //         if (!req.file) {
+    //             return res.status(400).send('No file uploaded.');
+    //         }
+
+    //         console.log('Uploaded file:', req.file);
+    //     })
+    // },
+    
     // show all list of category
     list: async (req, res, next) => {
     try {
