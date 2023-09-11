@@ -5,6 +5,7 @@ const categoryModel = new Schema({
     name: String,
     status: String,
     ordering: Number,
+    isShowHome: Boolean,
     createdAt: { type: Date, default: Date.now }
 });
 

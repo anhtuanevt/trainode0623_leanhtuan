@@ -28,7 +28,7 @@ module.exports = {
             const update = { $set: { status: status } };
     
             const result = await mainModel.updateMany(filter, update).exec();
-            console.log('Updated documents:', filter, result);
+            console.log('Updated documents:', filter, result, result.matchedCount);
         } catch (error) {
             console.error('Error updating documents:', error);
         }

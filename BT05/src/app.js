@@ -3,10 +3,11 @@ var express = require('express');
 var path = require('path');
 require('dotenv').config()
 
-const flash = require('express-flash');
-const session = require('express-session'); // Import express-session
-const expressLayouts = require("express-ejs-layouts");
+const flash = require('express-flash-notification');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const expressLayouts = require("express-ejs-layouts");
+const crypto = require('crypto');
 
 const db = require('./configs/db')
 var indexRouter = require('./routes/index');
@@ -15,15 +16,18 @@ const configAdmin = require('./configs/system')
 
 var app = express();
 db.connect();
+const secretKey = crypto.randomBytes(32).toString('hex');
 
 app.use(cookieParser());
-
-// Add session middleware
 app.use(session({
-  secret: 'your-secret-key', // Replace with your own secret key
-  resave: false,
-  saveUninitialized: true,
+  secret: secretKey, // Key bí mật để mã hóa dữ liệu phiên (có thể thay đổi)
+  resave: false, // Không lưu lại phiên mỗi lần request
+  saveUninitialized: false, // Không lưu phiên cho các phiên chưa được khởi tạo
+  cookie: {
+    maxAge: 3600000, // Thời gian sống của cookie phiên (ở đây là 1 giờ)
+  },
 }));
+app.use(flash(app));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -34,14 +38,7 @@ app.set("layout", "index");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
-app.use(
-  flash({
-    sessionKeyName: 'express-flash-message',
-  }));
 
 app.use('/', indexRouter);
 
